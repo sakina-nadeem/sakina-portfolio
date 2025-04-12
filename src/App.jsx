@@ -78,7 +78,7 @@ const App = () => {
                   currentPage === "portfolio" ? "text-indigo-600 font-bold" : ""
                 } hover:text-indigo-600 transition-colors`}
               >
-                Portfolio
+                Work
               </button>
               <button
                 onClick={() => setCurrentPage("about")}
