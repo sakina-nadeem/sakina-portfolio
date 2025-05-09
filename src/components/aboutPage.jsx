@@ -54,7 +54,7 @@ const AboutPage = () => {
                 {/* Image container with border */}
                 <div className="relative overflow-hidden rounded-xl border-2 border-blue-500/30">
                   <motion.img
-                    src="public/images/myProfile.jpeg"
+                    src="/images/myProfile.jpeg"
                     alt="Developer portrait"
                     className="w-full object-cover"
                     whileHover={{ scale: 1.05 }}
