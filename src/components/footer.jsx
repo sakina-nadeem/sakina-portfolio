@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white relative z-10">
       {/* Top Footer Section */}
       <div className="container mx-auto px-6 pt-12 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto text-center md:text-left">
@@ -15,7 +15,7 @@ const Footer = () => {
               {/* GitHub */}
               <a
                 href="https://github.com/sakina-nadeem"
-                className="text-gray-400 hover:text-indigo-400 transition"
+                className="text-gray-400 hover:text-blue-400 transition"
               >
                 <svg
                   className="w-6 h-6"
@@ -33,7 +33,7 @@ const Footer = () => {
               {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/in/sakina-nadeem-98a823288"
-                className="text-gray-400 hover:text-indigo-400 transition"
+                className="text-gray-400 hover:text-blue-400 transition"
               >
                 <svg
                   className="w-6 h-6"
@@ -52,22 +52,22 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="text-gray-400 space-y-2">
               <li>
-                <a href="#" className="hover:text-indigo-400 transition">
+                <a href="#" className="hover:text-blue-400 transition">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-indigo-400 transition">
+                <a href="#" className="hover:text-blue-400 transition">
                   Services
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-indigo-400 transition">
+                <a href="#" className="hover:text-blue-400 transition">
                   Portfolio
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-indigo-400 transition">
+                <a href="#" className="hover:text-blue-400 transition">
                   Contact
                 </a>
               </li>

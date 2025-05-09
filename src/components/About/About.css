@@ -1,0 +1,13 @@
+.about-section {
+    background: linear-gradient(135deg, #0062cc, #0096ff);
+    /* Or alternatively a solid blue: background-color: #0077cc; */
+}
+
+.about-card {
+    background: rgba(0, 119, 204, 0.1);
+    border: 1px solid #0077cc;
+}
+
+.about-title {
+    color: #0077cc;
+}

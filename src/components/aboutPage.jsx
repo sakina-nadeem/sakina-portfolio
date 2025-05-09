@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const AboutPage = () => {
   const [showResumeModal, setShowResumeModal] = useState(false);
@@ -11,31 +12,75 @@ const AboutPage = () => {
     setShowResumeModal(false);
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
     <div className="min-h-screen py-20">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/3 mb-10 md:mb-0">
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          className="flex flex-col md:flex-row"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div
+            className="md:w-1/3 lg:w-1/4 mb-10 md:mb-0"
+            variants={itemVariants}
+          >
             <div className="sticky top-24">
-              <div className="relative w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-xl">
-                <img
-                  src="images/myProfile.jpeg"
-                  alt="Developer portrait"
-                  className="w-full object-cover"
-                />
+              <div className="relative w-full max-w-md mx-auto overflow-hidden rounded-xl shadow-2xl">
+                {/* Glow effect - changed to blue */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/30 to-blue-400/30 blur-xl"></div>
+
+                {/* Image container with border */}
+                <div className="relative overflow-hidden rounded-xl border-2 border-blue-500/30">
+                  <motion.img
+                    src="public/images/myProfile.jpeg"
+                    alt="Developer portrait"
+                    className="w-full object-cover"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
               </div>
-              <div className="mt-8 text-center">
-                <h2 className="text-2xl font-bold">Sakina Developer</h2>
-                <p className="text-indigo-600 font-medium">
+
+              <motion.div
+                className="mt-8 text-center"
+                variants={itemVariants}
+              >
+                <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600">
+                  Sakina Developer
+                </h2>
+                <p className="text-blue-500 font-medium">
                   Frontend Developer & Designer
                 </p>
 
                 <div className="flex justify-center mt-4 space-x-4">
-                  <a
+                  <motion.a
                     href="https://github.com/sakina-nadeem"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                    className="text-gray-400 hover:text-blue-500 transition-colors"
+                    whileHover={{ y: -5, scale: 1.2 }}
                   >
                     <span className="sr-only">GitHub</span>
                     <svg
@@ -50,12 +95,13 @@ const AboutPage = () => {
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
                     href="https://www.linkedin.com/in/sakina-nadeem-98a823288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                    className="text-gray-400 hover:text-blue-500 transition-colors"
+                    whileHover={{ y: -5, scale: 1.2 }}
                   >
                     <span className="sr-only">LinkedIn</span>
                     <svg
@@ -66,108 +112,104 @@ const AboutPage = () => {
                     >
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
-                  </a>
-                  {/* <a
-                    href="#"
-                    className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-                  >
-                    <span className="sr-only">Twitter</span>
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.057 10.057 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                    </svg>
-                  </a> */}
-                  {/* <a
-                    href="#"
-                    className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-                  >
-                    <span className="sr-only">Dribbble</span>
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </a> */}
+                  </motion.a>
                 </div>
 
-                <div className="mt-8">
+                <motion.div
+                  className="mt-8"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                >
                   <button
                     onClick={openResumeModal}
-                    className="block w-full py-3 px-6 text-center bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition"
+                    className="block w-full py-3 px-6 text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
                   >
                     Explore My Resume
                   </button>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
-          </div>
-          <div className="md:w-2/3 md:pl-12">
-            <h1 className="text-4xl font-bold mb-8">About Me</h1>
+          </motion.div>
+
+          <motion.div
+            className="md:w-2/3 lg:w-3/4 md:pl-12"
+            variants={containerVariants}
+          >
+            <div className="text-center mb-16">
+              <h1 className="text-3xl md:text-4xl font-bold text-blue-500">
+                About Me
+              </h1>
+              <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
 
             <div className="prose dark:prose-invert max-w-none">
-              <p className="text-lg leading-relaxed mb-6">
+              <motion.p
+                className="text-lg leading-relaxed mb-6 text-gray-300"
+                variants={itemVariants}
+              >
                 Hello! I'm Sakina, a passionate frontend developer and designer
                 with over 3 years of experience in creating beautiful,
                 functional websites. My journey in the world of coding began
                 when I was just 18, and I've been in love with it ever since.
-              </p>
+              </motion.p>
 
-              <p className="text-lg leading-relaxed mb-6">
+              <motion.p
+                className="text-lg leading-relaxed mb-6 text-gray-300"
+                variants={itemVariants}
+              >
                 I specialize in modern web technologies including HTML, CSS, JS,
                 React, Node.js, Django and responsive design principles. My
                 approach combines technical expertise with a keen eye for
                 aesthetics, ensuring that every project I work on not only
                 functions flawlessly but looks stunning as well.
-              </p>
+              </motion.p>
 
-              <h2 className="text-2xl font-bold mt-12 mb-6">My Journey</h2>
+              <motion.h2
+                className="text-2xl font-bold mt-12 mb-6 text-white"
+                variants={itemVariants}
+              >
+                My Journey
+              </motion.h2>
 
               <div className="space-y-8">
-                <div className="flex">
+                <motion.div
+                  className="flex"
+                  variants={itemVariants}
+                  whileHover={{ x: 5 }}
+                >
                   <div className="flex flex-col items-center mr-6">
-                    <div className="w-4 h-4 rounded-full bg-indigo-600"></div>
-                    <div className="w-0.5 h-full bg-indigo-600"></div>
+                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30"></div>
+                    <div className="w-0.5 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">
+                    <h3 className="text-xl font-bold text-white">
                       Remote Internship at NovaGenius
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      (June - August 2024)
-                    </p>
-                    <p className="mt-2">
+                    <p className="text-blue-400">(June - August 2024)</p>
+                    <p className="mt-2 text-gray-300">
                       I had an amazing experience as a Frontend Development
                       Intern, where I worked on responsive web applications,
                       implemented interactive UI features, and collaborated with
                       a team to enhance user experience.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex">
+                <motion.div
+                  className="flex"
+                  variants={itemVariants}
+                  whileHover={{ x: 5 }}
+                >
                   <div className="flex flex-col items-center mr-6">
-                    <div className="w-4 h-4 rounded-full bg-indigo-600"></div>
-                    <div className="w-0.5 h-full bg-indigo-600"></div>
+                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30"></div>
+                    <div className="w-0.5 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">
+                    <h3 className="text-xl font-bold text-white">
                       Onsite Internship at SainCube
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      (May - September 2024)
-                    </p>
-                    <p className="mt-2">
+                    <p className="text-blue-400">(May - September 2024)</p>
+                    <p className="mt-2 text-gray-300">
                       I had the incredible opportunity to intern as a Full Stack
                       Developer at Saincube (Onsite, 2024), where I worked with
                       HTML, CSS, JavaScript, and the Django framework.
@@ -177,43 +219,23 @@ const AboutPage = () => {
                       both frontend and backend development.
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex">
+                <motion.div
+                  className="flex"
+                  variants={itemVariants}
+                  whileHover={{ x: 5 }}
+                >
                   <div className="flex flex-col items-center mr-6">
-                    <div className="w-4 h-4 rounded-full bg-indigo-600"></div>
-                    <div className="w-0.5 h-full bg-indigo-600"></div>
+                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30"></div>
+                    <div className="w-0.5 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">
-                      Remote Internship at CodeAlpha
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      (november - december 2023)
-                    </p>
-                    <p className="mt-2">
-                      My first internship as a Frontend Developer at CodeAlpha
-                      (Remote) was a valuable learning experience. I worked with
-                      HTML, CSS, and JavaScript, built responsive designs, and
-                      improved my problem-solving skills, laying the foundation
-                      for my development journey.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <div className="flex flex-col items-center mr-6">
-                    <div className="w-4 h-4 rounded-full bg-indigo-600"></div>
-                    <div className="w-0.5 h-full bg-indigo-600"></div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold">
+                    <h3 className="text-xl font-bold text-white">
                       Former Chair, MUET ACM-W
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      (August 2023 - January 2024)
-                    </p>
-                    <p className="mt-2">
+                    <p className="text-blue-400">(August 2023 - January 2024)</p>
+                    <p className="mt-2 text-gray-300">
                       As the Former Chair of MUET ACM-W, I led a dynamic team,
                       organizing workshops on AI and emerging technologies. I
                       managed events, collaborations, and community engagement,
@@ -223,120 +245,148 @@ const AboutPage = () => {
                       empowering others!
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex">
+                <motion.div
+                  className="flex"
+                  variants={itemVariants}
+                  whileHover={{ x: 5 }}
+                >
                   <div className="flex flex-col items-center mr-6">
-                    <div className="w-4 h-4 rounded-full bg-indigo-600"></div>
-                    <div className="w-0.5 h-full bg-indigo-600"></div>
+                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30"></div>
+                    <div className="w-0.5 h-full bg-gradient-to-b from-blue-500 to-blue-600"></div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">
+                    <h3 className="text-xl font-bold text-white">
                       Part-Time Web Developer | PentaByte
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      (August 2024)
-                    </p>
-                    <p className="mt-2">
+                    <p className="text-blue-400">(August 2024)</p>
+                    <p className="mt-2 text-gray-300">
                       As a Part-Time Web Developer at PentaByte, I craft dynamic
                       and efficient web solutions, blending creativity with
                       functionality. Collaborating with a skilled team, I
                       continuously adapt, innovate, and refine user experiences.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
-              <h2 className="text-2xl font-bold mt-12 mb-6">
+              <motion.h2
+                className="text-2xl font-bold mt-12 mb-6 text-white"
+                variants={itemVariants}
+              >
                 Skills & Expertise
-              </h2>
+              </motion.h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-bold mb-2">Frontend Development</h3>
-                  <div className="space-y-2">
+                <motion.div variants={itemVariants}>
+                  <h3 className="font-bold mb-2 text-white">Frontend Development</h3>
+                  <div className="space-y-4">
                     <div>
-                      <div className="flex justify-between mb-1">
-                        <span>React.js</span>
-                        <span>90%</span>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-300">React.js</span>
+                        <span className="text-blue-500 font-semibold">90%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-indigo-600 h-2 rounded-full"
+                      <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600"
                           style={{ width: "95%" }}
-                        ></div>
+                          initial={{ width: 0 }}
+                          animate={{ width: "95%" }}
+                          transition={{ duration: 1, delay: 0.3 }}
+                        ></motion.div>
                       </div>
                     </div>
                     <div>
-                      <div className="flex justify-between mb-1">
-                        <span>JavaScript</span>
-                        <span>85%</span>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-300">JavaScript</span>
+                        <span className="text-blue-500 font-semibold">85%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-indigo-600 h-2 rounded-full"
+                      <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600"
                           style={{ width: "90%" }}
-                        ></div>
+                          initial={{ width: 0 }}
+                          animate={{ width: "90%" }}
+                          transition={{ duration: 1, delay: 0.4 }}
+                        ></motion.div>
                       </div>
                     </div>
                     <div>
-                      <div className="flex justify-between mb-1">
-                        <span>Tailwind CSS</span>
-                        <span>85%</span>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-300">Tailwind CSS</span>
+                        <span className="text-blue-500 font-semibold">85%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-indigo-600 h-2 rounded-full"
+                      <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600"
                           style={{ width: "85%" }}
-                        ></div>
+                          initial={{ width: 0 }}
+                          animate={{ width: "85%" }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                        ></motion.div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
-                <div>
-                  <h3 className="font-bold mb-2">Backend Development</h3>
-                  <div className="space-y-2">
+                <motion.div variants={itemVariants}>
+                  <h3 className="font-bold mb-2 text-white">Backend Development</h3>
+                  <div className="space-y-4">
                     <div>
-                      <div className="flex justify-between mb-1">
-                        <span>Node.js</span>
-                        <span>70%</span>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-300">Node.js</span>
+                        <span className="text-blue-500 font-semibold">70%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-indigo-600 h-2 rounded-full"
+                      <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600"
                           style={{ width: "90%" }}
-                        ></div>
+                          initial={{ width: 0 }}
+                          animate={{ width: "90%" }}
+                          transition={{ duration: 1, delay: 0.6 }}
+                        ></motion.div>
                       </div>
                     </div>
                     <div>
-                      <div className="flex justify-between mb-1">
-                        <span>Django</span>
-                        <span>85%</span>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-300">Django</span>
+                        <span className="text-blue-500 font-semibold">85%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-indigo-600 h-2 rounded-full"
+                      <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600"
                           style={{ width: "85%" }}
-                        ></div>
+                          initial={{ width: 0 }}
+                          animate={{ width: "85%" }}
+                          transition={{ duration: 1, delay: 0.7 }}
+                        ></motion.div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
-              <h2 className="text-2xl font-bold mt-12 mb-6">Education</h2>
+              <motion.h2
+                className="text-2xl font-bold mt-12 mb-6 text-white"
+                variants={itemVariants}
+              >
+                Education
+              </motion.h2>
 
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold">
+              <motion.div
+                className="space-y-6"
+                variants={itemVariants}
+              >
+                <div className="bg-gradient-to-r from-blue-900/30 to-blue-800/30 p-6 rounded-xl backdrop-blur-sm border border-blue-500/20">
+                  <h3 className="text-xl font-bold text-white">
                     Undergraduate in Computer Systems
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-blue-400">
                     Mehran University of Engineering and Technology Jamshoro
                     (2022 - 2026)
                   </p>
-                  <p className="mt-2">
+                  <p className="mt-2 text-gray-300">
                     A Computer Systems Undergraduate with a 3.9 GPA, excelling
                     in web development, networking, and team leadership.
                     Passionate about innovation, I thrive in dynamic
@@ -344,96 +394,34 @@ const AboutPage = () => {
                     actively contributing to tech communities.
                   </p>
                 </div>
-              </div>
-
-              {/* <h2 className="text-2xl font-bold mt-12 mb-6">Get In Touch</h2>
-
-              <p className="text-lg leading-relaxed mb-6">
-                I'm always open to discussing new projects, creative ideas or
-                opportunities to be part of your visions. Feel free to contact
-                me using the form below or through social media.
-              </p>
-
-              <form className="mt-8 space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Your Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows="5"
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  ></textarea>
-                </div>
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </form> */}
+              </motion.div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Resume Modal */}
-
-      {/* Resume Modal */}
+      {/* Enhanced Resume Modal with Animations */}
       {showResumeModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 text-white">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-screen overflow-auto">
-            <div className="p-4 border-b flex justify-between items-center">
-              <h3 className="text-xl font-bold">My Resume</h3>
-              <button
+        <motion.div
+          className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-screen overflow-auto border border-blue-500/20"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          >
+            <div className="p-4 border-b border-gray-700 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-white">My Resume</h3>
+              <motion.button
                 onClick={closeResumeModal}
-                className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                className="text-gray-400 hover:text-white focus:outline-none"
+                whileHover={{ rotate: 90 }}
+                transition={{ duration: 0.2 }}
               >
                 <svg
                   className="w-6 h-6"
@@ -449,32 +437,50 @@ const AboutPage = () => {
                     d="M6 18L18 6M6 6l12 12"
                   ></path>
                 </svg>
-              </button>
+              </motion.button>
             </div>
             <div className="p-6">
               <iframe
                 src="documents/CV-Sakina-Nadeem.pdf"
-                className="w-full h-96"
+                className="w-full h-96 rounded-lg border border-gray-700"
                 title="My Resume"
               ></iframe>
             </div>
-            <div className="p-4 border-t flex justify-end">
-              <button
+            <div className="p-4 border-t border-gray-700 flex justify-end">
+              <motion.button
                 onClick={closeResumeModal}
-                className="py-2 px-4 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 mr-2"
+                className="py-2 px-4 bg-gray-700 text-white rounded-lg hover:bg-gray-600 mr-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Close
-              </button>
-              <a
+              </motion.button>
+              <motion.a
                 href="documents/CV-Sakina-Nadeem.pdf"
                 download="Sakina_Resume.pdf"
-                className="py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  ></path>
+                </svg>
                 Download Resume
-              </a>
+              </motion.a>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );

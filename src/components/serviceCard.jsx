@@ -1,12 +1,21 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const ServiceCard = ({ icon, title, description }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
-      <div className="bg-indigo-100 dark:bg-indigo-900/50 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-3xl">
+    <motion.div
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100 dark:border-gray-700"
+      whileHover={{
+        y: -10,
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+      }}
+    >
+      <div className="bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-purple-900/50 dark:to-indigo-900/50 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-3xl shadow-inner">
         {icon}
       </div>
-      <h3 className="text-xl font-bold mb-3 text-white">{title}</h3>
+      <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+        {title}
+      </h3>
       <p className="text-gray-600 dark:text-gray-300">{description}</p>
 
       <div className="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700">
@@ -15,7 +24,7 @@ const ServiceCard = ({ icon, title, description }) => {
             <>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +39,7 @@ const ServiceCard = ({ icon, title, description }) => {
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +54,7 @@ const ServiceCard = ({ icon, title, description }) => {
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +74,7 @@ const ServiceCard = ({ icon, title, description }) => {
             <>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +89,7 @@ const ServiceCard = ({ icon, title, description }) => {
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +104,7 @@ const ServiceCard = ({ icon, title, description }) => {
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +124,7 @@ const ServiceCard = ({ icon, title, description }) => {
             <>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +139,7 @@ const ServiceCard = ({ icon, title, description }) => {
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +154,7 @@ const ServiceCard = ({ icon, title, description }) => {
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <svg
-                  className="w-4 h-4 text-indigo-600 mr-2"
+                  className="w-4 h-4 text-purple-600 dark:text-purple-400 mr-2"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +172,10 @@ const ServiceCard = ({ icon, title, description }) => {
         </ul>
       </div>
 
-      <button className="mt-6 text-indigo-600 dark:text-indigo-400 font-medium text-sm flex items-center hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">
+      <motion.button
+        className="mt-6 text-purple-600 dark:text-purple-400 font-medium text-sm flex items-center hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+        whileHover={{ x: 5 }}
+      >
         Learn more
         <svg
           className="w-4 h-4 ml-1"
@@ -179,8 +191,8 @@ const ServiceCard = ({ icon, title, description }) => {
             d="M14 5l7 7m0 0l-7 7m7-7H3"
           ></path>
         </svg>
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 };
 
